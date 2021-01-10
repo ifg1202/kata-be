@@ -56,4 +56,26 @@ class GildedRoseTest {
         assertEquals(2, app.items[0].quality);
     }
 
+    @Test
+    @DisplayName("When Aged Brie with quality 50 increases then stay 50")
+    void agedBrie50IncreasesQuality() {
+        //given
+        Item[] items = new Item[] { new Item("Aged Brie", 5, 50) };
+        GildedRose app = new GildedRose(items);
+        // when
+        app.updateQuality();
+        // then
+        assertEquals(50, app.items[0].quality);
+    }
+
+    @Test
+    @DisplayName("Add an item with quality more than 50 then set its quality 50")
+    void qualityMoreThan50() {
+        //given
+        Item[] items = new Item[] { new Item("Elixir of the Mongoose", 5, 51) };
+        // when
+        GildedRose app = new GildedRose(items);
+        // then
+        assertEquals(50, app.items[0].quality);
+    }
 }

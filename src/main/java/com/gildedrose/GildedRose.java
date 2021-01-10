@@ -6,10 +6,12 @@ class GildedRose {
     private static final int DEGRADE_RANGE = 2;
 
     public GildedRose(Item[] items) {
+        validateQualityRange(items);
         this.items = items;
     }
 
     public void updateQuality() {
+
         for (int i = 0; i < items.length; i++) {
             if (!items[i].name.equals("Aged Brie")
                     && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
@@ -51,6 +53,13 @@ class GildedRose {
                     }
                 }
             }
+        }
+    }
+
+    private void validateQualityRange(Item[] items) {
+        for (Item item : items) {
+            if (item.quality > 50)
+                item.quality = 50;
         }
     }
 
