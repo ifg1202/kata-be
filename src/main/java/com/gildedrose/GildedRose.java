@@ -6,7 +6,6 @@ class GildedRose {
     private static final int DEGRADE_RANGE = 2;
 
     public GildedRose(Item[] items) {
-        validateQualityRange(items);
         this.items = items;
     }
 
@@ -53,13 +52,6 @@ class GildedRose {
                     }
                 }
             }
-        }
-    }
-
-    private void validateQualityRange(Item[] items) {
-        for (Item item : items) {
-            if (item.quality > 50)
-                item.quality = 50;
         }
     }
 

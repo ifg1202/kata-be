@@ -82,24 +82,13 @@ class GildedRoseTest {
     }
 
     @Test
-    @DisplayName("Add an item with quality more than 50 then set its quality 50")
-    void qualityMoreThan50() {
-        //given
-        Item[] items = new Item[] { new Item("Elixir of the Mongoose", 5, 51) };
-        // when
-        GildedRose app = new GildedRose(items);
-        // then
-        assertQuality(50, app.items[0]);
-        assertSale(5, app.items[0]);
-    }
-
-    @Test
     @DisplayName("Sulfuras, being a legendary item, never decreases in Quality")
     void sulfurasNeverDecreasesQuality() {
         // given
         Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 1, 10) };
-        // when
         GildedRose app = new GildedRose(items);
+        // when
+        app.updateQuality();
         // then
         assertQuality(10, app.items[0]);
     }
@@ -108,11 +97,50 @@ class GildedRoseTest {
     @DisplayName("Sulfuras, being a legendary item, never decreases in Quality")
     void sulfurasNeverSold() {
         // given
-        Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 10, 1) };
-        // when
+        Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 10, 80) };
         GildedRose app = new GildedRose(items);
+        // when
+        app.updateQuality();
         // then
+        assertQuality(80, app.items[0]);
         assertSale(10, app.items[0]);
     }
 
+    @Test
+    @DisplayName("Backstage passes, quality increases by 2 when there are 10 days or less")
+    void backstageIncreasingTenDaysOrLess() {
+        // given
+        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10) };
+        GildedRose app = new GildedRose(items);
+        // when
+        app.updateQuality();
+        // then
+        assertQuality(12, app.items[0]);
+        assertSale(9, app.items[0]);
+    }
+
+    @Test
+    @DisplayName("Backstage passes, quality increases by 3 when there are 5 days")
+    void backstageIncreasingFiveDaysOrLess() {
+        // given
+        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10) };
+        GildedRose app = new GildedRose(items);
+        // when
+        app.updateQuality();
+        // then
+        assertQuality(13, app.items[0]);
+        assertSale(4, app.items[0]);
+    }
+
+    @Test
+    @DisplayName("Backstage passes, quality drops to 0 when sellIn is 0")
+    void backstageIncreasingZeroDays() {
+        // given
+        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10) };
+        GildedRose app = new GildedRose(items);
+        // when
+        app.updateQuality();
+        // then
+        assertQuality(0, app.items[0]);
+    }
 }
