@@ -8,6 +8,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GildedRoseTest {
 
+    private void assertQuality(int expected, Item item) {
+        assertEquals(expected, item.quality);
+    }
+
+    private void assertSale(int expected, Item item) {
+        assertEquals(expected, item.sellIn);
+    }
+
     @Test
     @DisplayName("Once the sell by date has passed, Quality degrades twice as fast")
     void qualityDegrades() {
@@ -79,7 +87,26 @@ class GildedRoseTest {
         assertQuality(50, app.items[0]);
     }
 
-    private void assertQuality(int expected, Item item) {
-        assertEquals(expected, item.quality);
+    @Test
+    @DisplayName("Sulfuras, being a legendary item, never decreases in Quality")
+    void sulfurasNeverDecreasesQuality() {
+        // given
+        Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 1, 10) };
+        // when
+        GildedRose app = new GildedRose(items);
+        // then
+        assertQuality(10, app.items[0]);
     }
+
+    @Test
+    @DisplayName("Sulfuras, being a legendary item, never decreases in Quality")
+    void sulfurasNeverSold() {
+        // given
+        Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 10, 1) };
+        // when
+        GildedRose app = new GildedRose(items);
+        // then
+        assertSale(10, app.items[0]);
+    }
+
 }
