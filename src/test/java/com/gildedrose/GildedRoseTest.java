@@ -1,6 +1,5 @@
 package com.gildedrose;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -45,5 +44,16 @@ class GildedRoseTest {
         assertTrue(app.items[0].quality >= 0);
     }
 
+    @Test
+    @DisplayName("Aged Brie actually increases in Quality the older it gets")
+    void agedBrieIncreasesQuality() {
+        //given
+        Item[] items = new Item[] { new Item("Aged Brie", 5, 1) };
+        GildedRose app = new GildedRose(items);
+        // when
+        app.updateQuality();
+        // then
+        assertEquals(2, app.items[0].quality);
+    }
 
 }
