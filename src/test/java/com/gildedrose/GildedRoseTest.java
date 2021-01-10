@@ -17,7 +17,7 @@ class GildedRoseTest {
         // when
         app.updateQuality();
         // then
-        assertEquals(5, app.items[0].quality);
+        assertQuality(5, app.items[0]);
     }
 
     @Test
@@ -29,7 +29,7 @@ class GildedRoseTest {
         // when
         app.updateQuality();
         // then
-        assertEquals(0, app.items[0].quality);
+        assertQuality(0, app.items[0]);
     }
 
     @Test
@@ -53,7 +53,7 @@ class GildedRoseTest {
         // when
         app.updateQuality();
         // then
-        assertEquals(2, app.items[0].quality);
+        assertQuality(2, app.items[0]);
     }
 
     @Test
@@ -65,7 +65,7 @@ class GildedRoseTest {
         // when
         app.updateQuality();
         // then
-        assertEquals(50, app.items[0].quality);
+        assertQuality(50, app.items[0]);
     }
 
     @Test
@@ -76,6 +76,10 @@ class GildedRoseTest {
         // when
         GildedRose app = new GildedRose(items);
         // then
-        assertEquals(50, app.items[0].quality);
+        assertQuality(50, app.items[0]);
+    }
+
+    private void assertQuality(int expected, Item item) {
+        assertEquals(expected, item.quality);
     }
 }
