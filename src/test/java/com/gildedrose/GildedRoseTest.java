@@ -85,16 +85,16 @@ class GildedRoseTest {
     @DisplayName("Sulfuras, being a legendary item, never decreases in Quality")
     void sulfurasNeverDecreasesQuality() {
         // given
-        Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 1, 10) };
+        Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 1, 80) };
         GildedRose app = new GildedRose(items);
         // when
         app.updateItem();
         // then
-        assertQuality(10, app.items[0]);
+        assertQuality(80, app.items[0]);
     }
 
     @Test
-    @DisplayName("Sulfuras, being a legendary item, never decreases in Quality")
+    @DisplayName("Sulfuras, being a legendary item, never sold")
     void sulfurasNeverSold() {
         // given
         Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 10, 80) };
@@ -102,7 +102,6 @@ class GildedRoseTest {
         // when
         app.updateItem();
         // then
-        assertQuality(80, app.items[0]);
         assertSale(10, app.items[0]);
     }
 
