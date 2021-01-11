@@ -15,26 +15,12 @@ class GildedRose {
     }
 
     public void updateQuality() {
-
         for (Item item : items) {
+            decreaseSaleDate(item);
             if (isDegradable(item)) {
                 degradeQuality(item);
             } else {
                 increaseQuality(item);
-            }
-            decreaseSaleDate(item);
-            if (item.sellIn < 0) {
-                if (!item.name.equals(AGED_BRIE)) {
-                    if (!item.name.equals(BACKSTAGE)) {
-                        degradeQuality(item);
-                    } else {
-                        item.quality = 0;
-                    }
-                } else {
-                    if (item.quality < MAX_QUALITY) {
-                        item.quality = item.quality + 1;
-                    }
-                }
             }
         }
     }
@@ -60,6 +46,9 @@ class GildedRose {
                     }
                 }
             }
+        }
+        if (item.sellIn < 0 &&  item.name.equals(BACKSTAGE)) {
+            item.quality = 0;
         }
     }
 
