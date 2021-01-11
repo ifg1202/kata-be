@@ -1,5 +1,8 @@
 package com.gildedrose;
 
+import java.util.HashSet;
+import java.util.Set;
+
 class GildedRose {
 
     public static final String BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
@@ -8,6 +11,11 @@ class GildedRose {
     private static final int DEGRADE_RANGE = 2;
     public static final int MAX_QUALITY = 50;
     public static final int DROP_QUALITY_LIMIT = 0;
+    public static final Set<Integer> BACKSTAGE_LIMITS = new HashSet<Integer>(){{
+        add(10);
+        add(5);
+        add(0);
+    }};
 
     Item[] items;
 
@@ -40,26 +48,26 @@ class GildedRose {
         if (item.quality < MAX_QUALITY) {
             item.quality = item.quality + 1;
             if (item.name.equals(BACKSTAGE)) {
-                backstageQualitySecondIncrease(item, 11);
-                backstageQualitySecondIncrease(item, 6);
-                backstageQualitySecondIncrease(item, 0);
+                for (Integer limit : BACKSTAGE_LIMITS) {
+                    backstageQualitySecondIncrease(item, limit);
+                }
             }
         }
 
     }
 
     private void backstageQualitySecondIncrease(Item item, int limit) {
-        if (item.sellIn < limit) {
-            if (isDropable(limit)) {
+        if (item.sellIn <= limit) {
+            if (isDroppable(item)) {
                 item.quality = 0;
-            } else if (item.quality < MAX_QUALITY) {
+            } else if (item.quality <= MAX_QUALITY) {
                 item.quality = item.quality + 1;
             }
         }
     }
 
-    private boolean isDropable(int limit) {
-        return limit == DROP_QUALITY_LIMIT;
+    private boolean isDroppable(Item item) {
+        return item.sellIn <= DROP_QUALITY_LIMIT;
     }
 
     private boolean isDegradable(Item item) {

@@ -59,7 +59,7 @@ class GildedRoseTest {
     @DisplayName("Aged Brie actually increases in Quality the older it gets")
     void agedBrieIncreasesQuality() {
         //given
-        Item[] items = new Item[] { new Item("Aged Brie", 5, 1) };
+        Item[] items = new Item[] { new Item(GildedRose.AGED_BRIE, 5, 1) };
         GildedRose app = new GildedRose(items);
         // when
         app.updateItem();
@@ -72,7 +72,7 @@ class GildedRoseTest {
     @DisplayName("When Aged Brie with quality 50 increases then stay 50")
     void agedBrie50IncreasesQuality() {
         //given
-        Item[] items = new Item[] { new Item("Aged Brie", 5, 50) };
+        Item[] items = new Item[] { new Item(GildedRose.AGED_BRIE, 5, 50) };
         GildedRose app = new GildedRose(items);
         // when
         app.updateItem();
@@ -85,7 +85,7 @@ class GildedRoseTest {
     @DisplayName("Sulfuras, being a legendary item, never decreases in Quality")
     void sulfurasNeverDecreasesQuality() {
         // given
-        Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 1, 80) };
+        Item[] items = new Item[] { new Item(GildedRose.SULFURAS, 1, 80) };
         GildedRose app = new GildedRose(items);
         // when
         app.updateItem();
@@ -97,7 +97,7 @@ class GildedRoseTest {
     @DisplayName("Sulfuras, being a legendary item, never sold")
     void sulfurasNeverSold() {
         // given
-        Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 10, 80) };
+        Item[] items = new Item[] { new Item(GildedRose.SULFURAS, 10, 80) };
         GildedRose app = new GildedRose(items);
         // when
         app.updateItem();
@@ -109,7 +109,7 @@ class GildedRoseTest {
     @DisplayName("Backstage passes, quality increases by 2 when there are 10 days or less")
     void backstageIncreasingTenDaysOrLess() {
         // given
-        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10) };
+        Item[] items = new Item[] { new Item(GildedRose.BACKSTAGE, 10, 10) };
         GildedRose app = new GildedRose(items);
         // when
         app.updateItem();
@@ -122,7 +122,7 @@ class GildedRoseTest {
     @DisplayName("Backstage passes, quality increases by 3 when there are 5 days")
     void backstageIncreasingFiveDaysOrLess() {
         // given
-        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10) };
+        Item[] items = new Item[] { new Item(GildedRose.BACKSTAGE, 5, 10) };
         GildedRose app = new GildedRose(items);
         // when
         app.updateItem();
@@ -135,7 +135,7 @@ class GildedRoseTest {
     @DisplayName("Backstage passes, quality drops to 0 when sellIn is 0")
     void backstageIncreasingZeroDays() {
         // given
-        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10) };
+        Item[] items = new Item[] { new Item(GildedRose.BACKSTAGE, 0, 10) };
         GildedRose app = new GildedRose(items);
         // when
         app.updateItem();
