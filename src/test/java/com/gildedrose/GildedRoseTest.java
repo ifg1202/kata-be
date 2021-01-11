@@ -23,7 +23,7 @@ class GildedRoseTest {
         Item[] items = new Item[] { new Item("Elixir of the Mongoose", 5, 7) };
         GildedRose app = new GildedRose(items);
         // when
-        app.updateQuality();
+        app.updateItem();
         // then
         assertQuality(5, app.items[0]);
         assertSale(4, app.items[0]);
@@ -36,7 +36,7 @@ class GildedRoseTest {
         Item[] items = new Item[] { new Item("Elixir of the Mongoose", 5, 1) };
         GildedRose app = new GildedRose(items);
         // when
-        app.updateQuality();
+        app.updateItem();
         // then
         assertQuality(0, app.items[0]);
         assertSale(4, app.items[0]);
@@ -49,7 +49,7 @@ class GildedRoseTest {
         Item[] items = new Item[] { new Item("Elixir of the Mongoose", 5, 0) };
         GildedRose app = new GildedRose(items);
         // when
-        app.updateQuality();
+        app.updateItem();
         // then
         assertTrue(app.items[0].quality >= 0);
         assertSale(4, app.items[0]);
@@ -62,7 +62,7 @@ class GildedRoseTest {
         Item[] items = new Item[] { new Item("Aged Brie", 5, 1) };
         GildedRose app = new GildedRose(items);
         // when
-        app.updateQuality();
+        app.updateItem();
         // then
         assertQuality(2, app.items[0]);
         assertSale(4, app.items[0]);
@@ -75,7 +75,7 @@ class GildedRoseTest {
         Item[] items = new Item[] { new Item("Aged Brie", 5, 50) };
         GildedRose app = new GildedRose(items);
         // when
-        app.updateQuality();
+        app.updateItem();
         // then
         assertQuality(50, app.items[0]);
         assertSale(4, app.items[0]);
@@ -88,7 +88,7 @@ class GildedRoseTest {
         Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 1, 10) };
         GildedRose app = new GildedRose(items);
         // when
-        app.updateQuality();
+        app.updateItem();
         // then
         assertQuality(10, app.items[0]);
     }
@@ -100,7 +100,7 @@ class GildedRoseTest {
         Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 10, 80) };
         GildedRose app = new GildedRose(items);
         // when
-        app.updateQuality();
+        app.updateItem();
         // then
         assertQuality(80, app.items[0]);
         assertSale(10, app.items[0]);
@@ -113,7 +113,7 @@ class GildedRoseTest {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10) };
         GildedRose app = new GildedRose(items);
         // when
-        app.updateQuality();
+        app.updateItem();
         // then
         assertQuality(12, app.items[0]);
         assertSale(9, app.items[0]);
@@ -126,7 +126,7 @@ class GildedRoseTest {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10) };
         GildedRose app = new GildedRose(items);
         // when
-        app.updateQuality();
+        app.updateItem();
         // then
         assertQuality(13, app.items[0]);
         assertSale(4, app.items[0]);
@@ -139,7 +139,7 @@ class GildedRoseTest {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10) };
         GildedRose app = new GildedRose(items);
         // when
-        app.updateQuality();
+        app.updateItem();
         // then
         assertQuality(0, app.items[0]);
     }

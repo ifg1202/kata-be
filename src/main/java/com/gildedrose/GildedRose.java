@@ -14,18 +14,22 @@ class GildedRose {
         this.items = items;
     }
 
-    public void updateQuality() {
+    public void updateItem() {
         for (Item item : items) {
-            decreaseSaleDate(item);
-            if (isDegradable(item)) {
-                degradeQuality(item);
-            } else {
-                increaseQuality(item);
-            }
+            updateSellIn(item);
+            updateQuality(item);
         }
     }
 
-    private void decreaseSaleDate(Item item) {
+    private void updateQuality(Item item) {
+        if (isDegradable(item)) {
+            degradeQuality(item);
+        } else {
+            increaseQuality(item);
+        }
+    }
+
+    private void updateSellIn(Item item) {
         if (!item.name.equals(SULFURAS)) {
             item.sellIn = item.sellIn - 1;
         }
@@ -35,20 +39,20 @@ class GildedRose {
         if (item.quality < MAX_QUALITY) {
             item.quality = item.quality + 1;
             if (item.name.equals(BACKSTAGE)) {
-                if (item.sellIn < 11) {
-                    if (item.quality < MAX_QUALITY) {
-                        item.quality = item.quality + 1;
-                    }
-                }
-                if (item.sellIn < 6) {
-                    if (item.quality < MAX_QUALITY) {
-                        item.quality = item.quality + 1;
-                    }
-                }
+                backstageQualitySecondIncrease(item, 11);
+                backstageQualitySecondIncrease(item, 6);
             }
         }
         if (item.sellIn < 0 &&  item.name.equals(BACKSTAGE)) {
             item.quality = 0;
+        }
+    }
+
+    private void backstageQualitySecondIncrease(Item item, int i) {
+        if (item.sellIn < i) {
+            if (item.quality < MAX_QUALITY) {
+                item.quality = item.quality + 1;
+            }
         }
     }
 
