@@ -8,8 +8,6 @@ public class Item {
 
     public int quality;
 
-    private static final Integer SELL_IN_DECREASE_RATIO = 1;
-
     public Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
@@ -19,10 +17,5 @@ public class Item {
    @Override
    public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
-    }
-
-    public void update() {
-        sellIn = sellIn == 0 ? sellIn : sellIn - SELL_IN_DECREASE_RATIO;
-        quality = 0;
     }
 }

@@ -25,9 +25,15 @@ class GildedRose {
 
     public void updateItem() {
         for (Item item : items) {
-            updateSellIn(item);
-            updateQuality(item);
+            if (isUpgradeable(item)) {
+                updateSellIn(item);
+                updateQuality(item);
+            }
         }
+    }
+
+    private boolean isUpgradeable(Item item) {
+        return !item.name.equals(SULFURAS);
     }
 
     private void updateQuality(Item item) {
@@ -39,21 +45,24 @@ class GildedRose {
     }
 
     private void updateSellIn(Item item) {
-        if (!item.name.equals(SULFURAS)) {
-            item.sellIn = item.sellIn - 1;
-        }
+        item.sellIn--;
     }
 
     private void increaseQuality(Item item) {
         if (item.quality < MAX_QUALITY) {
             item.quality = item.quality + 1;
-            if (item.name.equals(BACKSTAGE)) {
-                for (Integer limit : BACKSTAGE_LIMITS) {
-                    backstageQualitySecondIncrease(item, limit);
-                }
-            }
+            extraIncreaseQuality(item);
         }
+    }
 
+    private void extraIncreaseQuality(Item item) {
+        if (isExtraIncrease(item)) {
+            BACKSTAGE_LIMITS.forEach(limit -> backstageQualitySecondIncrease(item, limit));
+        }
+    }
+
+    private boolean isExtraIncrease(Item item) {
+        return item.name.equals(BACKSTAGE);
     }
 
     private void backstageQualitySecondIncrease(Item item, int limit) {
@@ -75,7 +84,7 @@ class GildedRose {
     }
 
     private void degradeQuality(Item item) {
-        if (item.quality > 0 && !item.name.equals(SULFURAS)) {
+        if (item.quality > 0) {
             if(item.quality == 1) {
                 item.quality = 0;
             } else {
