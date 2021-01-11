@@ -18,4 +18,9 @@ public class Item {
    public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
     }
+
+    public void update() {
+        sellIn = 0;
+        quality = 0;
+    }
 }
